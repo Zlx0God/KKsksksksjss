@@ -1,0 +1,23 @@
+local mensagemInicial = "Tem algum brasileiro por aqui? 🇧🇷 (Fale Eu sou Brasileiro)"
+local mensagemPropaganda = "Ei, quer saber como levelar mais rápido? Entra no nosso servidor e descubra! discord.gg/seu_servidor"
+
+-- Função para enviar mensagens no chat
+function enviarMensagem(mensagem)
+    game.ReplicatedStorage.DefaultChat:FireClient(game.Players.LocalPlayer, mensagem)
+end
+
+-- Função para iniciar a conversa
+function iniciarConversa()
+    enviarMensagem(mensagemInicial)
+end
+
+-- Conectar-se ao evento de mensagens recebidas
+game.ReplicatedStorage.DefaultChat:OnClientEvent:Connect(function(player, message)
+    -- Verificar se a mensagem contém a palavra "brasileiro" (pode ser adaptado para outras palavras-chave)
+    if string.lower(message):find("brasileiro") then
+        enviarMensagem(mensagemPropaganda)
+    end
+end)
+
+-- Iniciar a conversa ao executar o script
+iniciarConversa()
